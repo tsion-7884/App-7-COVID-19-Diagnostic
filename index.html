@@ -6,7 +6,7 @@ THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.
  
  
 Authors in chronological order of contribution:
-Author 1
+Tsion Teffera
 Author 2
  
 Further Information:
@@ -17,15 +17,199 @@ Timothy Riedel
 triedel@utexas.edu
  
 Brief Description of Goal of Code:
-blah, blah, blah,
+As a learning experience for students to practice coding and for users to determine if the symptoms they are experiencing are indicative of psoriasis or eczema.
  
 Known Issues:
-blah, blah, blah, blah
+none yet!
 -->
 
    <head> 
       
-	   PUT YOUR OLD CODE IN HERE
+	   <!DOCTYPE html> 
+<html> 
+	
+   <head> 
+      <title>Hello World</title>  
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <link rel="stylesheet" href="w3.css">
+      <link rel="stylesheet" href="w3-colors-flat.css">
+   </head> 
+
+
+<script>
+//The section below is the code that is responsible for tallying the answer choices and outputing a "result" response on the last page!
+        var psoriasis_count = 0;
+        var cold_count = 0;
+
+//This part is the code that comes up with the total number of answers that indicate that the user has psoriasis.
+        function psoriasisAdd(){
+            psoriasis_count = psoriasis_count + 1;
+
+        }
+//This does the same thing as lines 47-51 but for eczema (I just changed the names to "psoriasis" and "eczema" instead of "allergy" and "cold"))
+        function eczemaAdd(){
+            eczema_count = eczema_count + 1;
+        }
+//This part was added by me to respond to the "results" button on the last page and was coded to show the user tallies for both the allergies and cold category.
+//Theoretically, the category with the largest ratio (a.k.a largest numerator) is the cause of the user's symptoms.
+//I definetly had issues with creating this because I didn't match it to the button that I made on the last page correctly, oops! It is fixed now!
+	function resultPercentage() {	
+		var psoriasisPercent = psoriasis_count + "/6";
+		var eczemaPercent = eczema_count + "/6";
+		var resultText = document.getElementById("results");
+		resultText.innerHTML = "Probability it is psoriasis =" + psoriasisPercent + "<br> Probability it is a eczema =" + eczemaPercent; 
+		}
+	
+</script>
+
+
+<style>	
+.body {
+     margin: 0em;
+}
+
+.page {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -100vw;
+    overflow-y: auto;
+    z-index: 0;
+    background-color: hsl(0,0%,100%);
+}
+
+  .page:target {
+    left: 0vw;
+    z-index: 1;
+}
+</style>
+<!--This section below (lines 92-108) is the code for the main page of the website! 
+It codes for the page that appears when you first open the app/click on the website link!-->
+<body>
+<!--this is the code for the main page header, it codes for the formatting, color, and text of the header.-->
+<div id="header" class="w3-container w3-flat-carrot">
+	<h1>Psoriasis or Eczema?</h1>
+</div>
+<!--this section below codes for the main text of the page as well as includes the "get started"
+button which queues the website to continue on to page 1 (question 1)-->
+<div id="content" class="w3-container">
+	<p>Are you feeling like you might have a eczema but wonder if it is psoriasis? Answer a few short questions to find out!</p>
+	
+<!--this is the code for the first button! it should take users to the first question! It seems 
+to function properly so far!-->
+	<a href="#one" class="w3-btn w3-grey w3-round"> Get Started </a>
+	
+	<p>The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at 		Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code 			does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.</p>
+ 	
+	<p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>
+
+<!-- the section below codes for the first page, Question 1 is on this page (as indicated by the coding for the header), 
+it is pretty uniform and color and size compared to the main page and I did not have much trouble with this page.-->
+<div class="page" id="one">
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 1</h1>
+	</div>
+<!-- below is the question prompt and the coding for the buttons on the page.
+the "outside irritants" answer choice tells the website to add a tally to the "eczema" count which we already programmed above.-->
+    	<div id="content" class="w3-container">
+        <p>What triggered the reaction in your skin?</p>  
+	<a href="#two"  onclick="eczemaAdd();" class="w3-btn w3-black">Outside irritants such as dust, foods, or pollen.</a>
+        <a href="#two"  onclick="psoriasisAdd();" class="w3-btn w3-black">Nothing outside in particular.</a>
+		
+<!-- page 2! to be honest I copied and pasted this code from page 1 and just changed the numbers and question prompt, I
+also had to make sure the buttons would go to the next page so I changed "#two" to "#three" and that seemed to work. -->
+<div class="page" id="two">
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 2</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+	<p>Have you experienced any bacterial infections on the affected skin?</p>
+<!--I had some problems with getting these buttons to work properly and actually progress to the next page but the issue seems to be resolved.-->
+	<a href="#three"  onclick="eczemaAdd();" class="w3-btn w3-black">Yes</a>
+	<a href="#three"  onclick="psoriasisAdd();" class="w3-btn w3-black">No</a>
+
+<!-- page 3! same as page 1 and 2 just copied and pasted the code and changed some numbers/the question! It also seems to work
+fine.-->
+<div class="page" id="three">
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 3</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+	<p>Are you experiencing a stinging or burning sensation?</p>
+	<a href="#four"  onclick="psoriasisAdd();" class="w3-btn w3-black">Yes</a>
+	<a href="#four"  onclick="eczemaAdd();" class="w3-btn w3-black">No</a>
+		
+<!-- question 4!!! pretty much the same as the other questions tbh. the only difference is that this one leads to 
+the fifth question!! I am hoping that I will be able to code the images onto this particular question! -->
+<div class="page" id="four">
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 4</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+	<p>Select the option that best describes the inflamed areas of your skin.</p>
+	<a href="#five"  onclick="eczemaAdd();" class="w3-btn w3-black">inflamed, oozing, crusty with rough, leathery patches that are sometimes dark and/or swollen</a>
+        <a href="#five"  onclick="psoriasisAdd();" class="w3-btn w3-black">red patches, silvery, raised up high, thicker, more inflamed</a>
+
+<!-- question 5!! I just looked up symptoms of psoriasis and eczema and was able to come up with a pretty straightforward question!-->
+<div class="page" id="five">
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 5</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+	<p>In what areas of your body are you experiencing symptoms?</p>
+	<a href="#six"  onclick="eczemaAdd();" class="w3-btn w3-black">parts of your body that bend, like your inner elbow or behind your knees</a>
+	<a href="#six"  onclick="psoriasisAdd();" class="w3-btn w3-black">Scalp, face, Lower back, Palms, Soles, nails, Mouth, lips, Eyelids, and Ears</a>
+
+<!--I just created this question as well and I decided to change up the answer choices from a simple yes/no to provide 
+some variety and allow the user to provide more information to the site, which will result in a more accurate output.-->
+<div class="page" id="six">
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 6</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+	<p>Which of the following best describes your family's medical history?</p>
+	<a href="#seven"  onclick="psoriasisAdd();" class="w3-btn w3-black">diabetes, heart disease, or depression</a>
+	<a href="#seven"  onclick="eczemaAdd();" class="w3-btn w3-black">eczema, asthma, or hay fever</a>
+
+<!-- results page!! -->
+<div class="page" id="seven">
+<!-- below is the reader which reads "results", it is basically the same as the other pages ngl. I had some trouble with this 
+page because the instructions had me confused, then once I added the page I had to add more code to calculate the tallies so
+that there would be actual results to be displayed. After all that I had to make sure the code for the results button would 
+match the code for the calculations (which took me a second but I got it!). -->
+	<div id="header" class"w3-container w3-flat-carrot"=>
+		<h1>Results</h1>
+	</div>
+<!-- this button is different from the all the other buttons on this site because it doesn't send you to another page, it
+just makes the program calculate how many of the user's responses indicate psoriasis and how many indicate a eczema and displays
+those results on the page. Apps/Websites like this will empower regular users to take a more active role in their own health 
+because it makes diagnostic tools easy and accessible to the average person and not expensive and time-consuming like doctor/
+hosptial visits!-->
+	<div id="content" class="w3-container">
+		<p id="results">Results Here</p>
+		<a href="#seven"  onclick="resultPercentage();" class="w3-btn w3-black">results</a>
+		
+
+</div>	
+<!--below is the code for footer of the page-->
+<footer class="w3-bottom w3-container w3-flat-carrot">
+	<p>DIY!</p>
+	
+<!-- The following code lets you know when the file was last modified.
+This will help you know if you are looking at the new version of the file or if there is a delay on GitHub.-->
+       var docMod = document.lastModified;
+       alert("This file last modified  " + docMod);
+       console.log("This file last modified  " + docMod);
+<!--If you find the alert box annoying, comment out that line and timestamp will still show up in the debugging console-->
+
+</footer>
 	   
    </body>
 </html>
